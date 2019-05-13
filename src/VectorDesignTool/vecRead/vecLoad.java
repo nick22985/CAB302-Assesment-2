@@ -43,6 +43,7 @@ public class vecLoad {
                 TempCommands[a][b].add(words[b]);
             }
         }
+
         return TempCommands;
     }
 

@@ -1,6 +1,7 @@
 package VectorDesignTool;
 
 import VectorDesignTool.vecRead.vecLoad;
+import VectorDesignTool.Drawing.commandsHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,47 +22,13 @@ public class VectorDesignController implements Initializable {
     @FXML
     GraphicsContext gc;
 
-    /**
-     *
-     * @param gc
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
-     */
-       public void DrawLine(GraphicsContext gc, double x1, double y1, double x2, double y2) {
-
-        double x = gc.getCanvas().getHeight();
-        double y = gc.getCanvas().getWidth();
-
-        gc.beginPath();
-        gc.moveTo(x1 * x / 1, y1 * x / 1);
-        gc.lineTo( x2 * y / 1, y2 * y / 1);
-        gc.stroke();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("test");
         gc = canvas.getGraphicsContext2D();
 
         ArrayList[][] command = vecLoad.LoadVecFile("Line.vec");
-        System.out.println(command.length);
 
-        for (int i = 0; i < command.length; i++) {
-            double x1 = Double.parseDouble(command[i][1].toString().replaceAll("\\[", "")
-                    .replaceAll("\\]", ""));
-            double y1 = Double.parseDouble(command[i][2].toString().replaceAll("\\[", "")
-                    .replaceAll("\\]", ""));
-            double x2 = Double.parseDouble(command[i][3].toString().replaceAll("\\[", "")
-                    .replaceAll("\\]", ""));
-            double y2 = Double.parseDouble(command[i][4].toString().replaceAll("\\[", "")
-                    .replaceAll("\\]", ""));
-            DrawLine(gc, x1, y1, x2, y2);
-        }
-
-
-
+        commandsHandler.commandsHandler(gc, command);
 //        gc.setLineWidth(20);
 //        gc.setFill(Color.RED);
 //        gc.strokeRoundRect(10, 10, 50, 50, 10, 10);
