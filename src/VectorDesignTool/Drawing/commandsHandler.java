@@ -100,8 +100,17 @@ public class commandsHandler {
 
 //        gc.fillRoundRect(x1 * x /1, y1 * y / 1 , x2 * x / 1, y2 * y / 1, 1, 1);
 
-        gc.strokeRoundRect(x1 * x / 2, y1 * y / 2 , x2 * x / 2 , y2 * y / 2, 1, 1);
+//        gc.strokeRoundRect(x1 * x / 2, y1 * y / 2 , x2 * x / 2 , y2 * y / 2, 1, 1);
 
+
+        gc.beginPath();
+        gc.moveTo(x1 * x / 1, y1 * y / 1);
+        gc.lineTo(x1 * x / 1, y2 * y / 1);
+        gc.lineTo(x2 * x / 1, y2 * y / 1);
+        gc.lineTo(x2 * x / 1, y1 * y / 1);
+        gc.lineTo(x1 * x / 1, y1 * y / 1);
+
+        gc.stroke();
     }
 
     /**
