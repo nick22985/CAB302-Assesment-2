@@ -3,25 +3,26 @@ package VectorDesignTool.vecRead;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class vecLoad {
 
     /**
-     *
-     * @param fileName
+     * Return the lines in the .vec file as an array list
+     * @param fileName of the .vec file
+     * @return Commands as ArrayList[][]
      */
-    public static void LoadVecFile(String fileName) {
+    public static ArrayList[][] LoadVecFile(String fileName) {
         BufferedReader br = null;
         String workingDir = System.getProperty("user.dir");
-        System.out.println(workingDir);
+        ArrayList commands = new ArrayList();
+
         try {
             br = new BufferedReader(new FileReader(workingDir + "/src/vecFiles/" + fileName));
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                commands.add(line);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -31,6 +32,18 @@ public class vecLoad {
                 e.printStackTrace();
             }
         }
+
+        int commandsLength = commands.size();
+        ArrayList[][] TempCommands = new ArrayList[commandsLength][5];
+        for(int a = 0; a < commandsLength; a++) {
+            String temp = commands.get(a).toString();
+            String [] words = temp.split(" ");
+            for (int b = 0; b < words.length; b++) {
+                TempCommands[a][b] = new ArrayList();
+                TempCommands[a][b].add(words[b]);
+            }
+        }
+        return TempCommands;
     }
 
 }
