@@ -2,8 +2,9 @@ module CAB302.Assesment {
     requires javafx.fxml;
     requires javafx.controls;
 
-    opens sample;
+//    opens sample;
+//    opens VectorDrawingToolTest;
     opens VectorDesignTool;
-    opens VectorDrawingToolTest;
+
 
 }
