@@ -4,5 +4,6 @@ module CAB302.Assesment {
 
     opens sample;
     opens VectorDesignTool;
+    opens VectorDrawingToolTest;
 
 }
