@@ -3,5 +3,6 @@ module CAB302.Assesment {
     requires javafx.controls;
 
     opens sample;
+    opens VectorDesignTool;
 
 }
