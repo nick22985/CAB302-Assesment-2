@@ -21,6 +21,6 @@
             </HBox>
          </children>
       </VBox>
-      <Canvas fx:id="canvas" height="661.0" layoutX="310.0" layoutY="30.0" width="661.0" />
+      <Canvas fx:id="canvas" height="656.0" layoutX="310.0" layoutY="30.0" width="661.0" />
    </children>
 </Pane>
