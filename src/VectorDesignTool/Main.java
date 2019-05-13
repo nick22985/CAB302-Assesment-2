@@ -20,6 +20,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
+
+
 //        ArrayList command = vecLoad.LoadVecFile("Line.vec");
 //
 //        for(int i = 0; i< command.size(); i++) {
