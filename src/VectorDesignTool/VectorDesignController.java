@@ -24,6 +24,7 @@ public class VectorDesignController implements Initializable {
         gc = canvas.getGraphicsContext2D();
         ArrayList[][] command = vecLoad.LoadVecFile("Line.vec");
         commandsHandler.commandsHandler(gc, command);
+
     }
 
     public void toolSelected(ActionEvent event) {

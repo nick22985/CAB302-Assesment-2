@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class commandsHandler {
 
@@ -97,17 +98,15 @@ public class commandsHandler {
         double x = gc.getCanvas().getHeight();
         double y = gc.getCanvas().getWidth();
 
-//        gc.fillRoundRect(x1 * x /1, y1 * y / 1 , x2 * x / 1, y2 * y / 1, 1, 1);
-
-//        gc.strokeRoundRect(x1 * x / 2, y1 * y / 2 , x2 * x / 2 , y2 * y / 2, 1, 1);
-
-
-        gc.beginPath();
-        gc.moveTo(x1 * x / 1, y1 * y / 1);
-        gc.lineTo(x1 * x / 1, y2 * y / 1);
-        gc.lineTo(x2 * x / 1, y2 * y / 1);
-        gc.lineTo(x2 * x / 1, y1 * y / 1);
-        gc.lineTo(x1 * x / 1, y1 * y / 1);
+        gc.strokeRect(x1 * x / 2, y1 * y / 2, x2 * x / 2, y2 * y / 2);
+        gc.setFill(Color.RED);
+        gc.fillRoundRect(x1 * x / 2, y1 * y / 2, x2 * x /2, y2 * y /2, 0, 0);
+//        gc.beginPath();
+//        gc.moveTo(x1 * x / 1, y1 * y / 1);
+//        gc.lineTo(x1 * x / 1, y2 * y / 1);
+//        gc.lineTo(x2 * x / 1, y2 * y / 1);
+//        gc.lineTo(x2 * x / 1, y1 * y / 1);
+//        gc.lineTo(x1 * x / 1, y1 * y / 1);
 
         gc.stroke();
     }
@@ -136,10 +135,8 @@ public class commandsHandler {
     }
 
     public static void ChangeFillColour(Color color) {
-
-
+        fill
     }
-
 
 
 }

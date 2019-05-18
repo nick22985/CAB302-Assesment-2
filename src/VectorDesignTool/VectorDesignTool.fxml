@@ -1,28 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VectorDesignTool.VectorDesignController">
    <children>
-      <VBox prefHeight="50.0" prefWidth="1280.0">
+      <Pane fx:id="canvasContainer" layoutX="14.0" layoutY="63.0" prefHeight="644.0" prefWidth="1256.0">
          <children>
-            <HBox prefHeight="29.0" prefWidth="1280.0" spacing="10.0">
-               <padding>
-                  <Insets left="5.0" top="5.0" />
-               </padding>
-            </HBox>
+            <Canvas fx:id="canvas" height="417.0" layoutX="691.0" layoutY="8.0" width="565.0" />
+         </children>
+      </Pane>
+      <VBox layoutX="1.0" prefHeight="50.0" prefWidth="1280.0">
+         <children>
+            <MenuBar prefHeight="380.0" prefWidth="1280.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Open" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem mnemonicParsing="false" text="Save As" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                      <Menu mnemonicParsing="false" text="Edit">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Delete" />
+                        </items>
+                      </Menu>
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
          </children>
       </VBox>
-      <VBox layoutX="-1.0" layoutY="30.0" prefHeight="690.0" prefWidth="51.0">
+      <VBox layoutX="86.0" layoutY="211.0" prefHeight="690.0" prefWidth="189.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#toolSelected" text="Brush" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton">
+               <toggleGroup>
+                  <ToggleGroup fx:id="Tools" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="145.0" text="RadioButton" toggleGroup="$Tools" />
          </children>
       </VBox>
-      <Canvas fx:id="canvas" height="665.0" layoutX="308.0" layoutY="50.0" width="665.0" />
+      <Button layoutX="1213.0" layoutY="38.0" mnemonicParsing="false" onAction="#toolSelected" text="Brush" />
    </children>
 </Pane>
