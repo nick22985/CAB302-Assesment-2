@@ -14,11 +14,10 @@ public class vecLoad {
      */
     public static ArrayList[][] LoadVecFile(String fileName) {
         BufferedReader br = null;
-        String workingDir = System.getProperty("user.dir");
         ArrayList commands = new ArrayList();
 
         try {
-            br = new BufferedReader(new FileReader(workingDir + "/src/vecFiles/" + fileName));
+            br = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = br.readLine()) != null) {
                 commands.add(line);
@@ -34,7 +33,7 @@ public class vecLoad {
         }
 
         int commandsLength = commands.size();
-        ArrayList[][] TempCommands = new ArrayList[commandsLength][5];
+        ArrayList[][] TempCommands = new ArrayList[commandsLength][90];
         for(int a = 0; a < commandsLength; a++) {
             String temp = commands.get(a).toString();
             String [] words = temp.split(" ");
@@ -45,5 +44,4 @@ public class vecLoad {
         }
         return TempCommands;
     }
-
 }

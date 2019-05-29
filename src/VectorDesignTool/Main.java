@@ -1,8 +1,5 @@
 package VectorDesignTool;
 
-import VectorDesignTool.vecRead.vecLoad;
-import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,14 +16,6 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-
-
-//        ArrayList command = vecLoad.LoadVecFile("Line.vec");
-//
-//        for(int i = 0; i< command.size(); i++) {
-//            System.out.println(command.get(i));
-//        }
 
     }
 

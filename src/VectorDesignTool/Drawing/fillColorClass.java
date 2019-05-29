@@ -1,19 +1,17 @@
 package VectorDesignTool.Drawing;
 
+import javafx.scene.paint.Color;
+
 public class fillColorClass {
-    private String color;
-    private boolean fillTrue = false;
+    public static boolean fillTrue;
+    public static Color color;
 
-    public String getColor() {
-        return color;
+    public static void setColor(Color newColor) {
+        color = newColor;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public void setFill(boolean fillTrue) {
-        this.fillTrue = fillTrue;
+    public static void setFill(boolean fillIsTrue) {
+        fillTrue = fillIsTrue;
     }
 
 }
