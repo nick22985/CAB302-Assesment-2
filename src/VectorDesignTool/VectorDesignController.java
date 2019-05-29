@@ -1,5 +1,6 @@
 package VectorDesignTool;
 
+import VectorDesignTool.vecRead.fileClass;
 import VectorDesignTool.vecRead.vecLoad;
 import VectorDesignTool.Drawing.commandsHandler;
 import javafx.beans.property.StringProperty;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -20,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class VectorDesignController implements Initializable {
 
-    ObservableList<String> choiceBoxList = FXCollections.observableArrayList("Line", "Plot", "Rectangle", "Ellipse", "Polygon");
+    ObservableList<String> shapeSelecterList = FXCollections.observableArrayList("LINE", "PLOT", "RECTANGLE", "ELLIPSE", "POLYGON");
 
     @FXML
     private Canvas canvas;
@@ -28,17 +30,22 @@ public class VectorDesignController implements Initializable {
     private GraphicsContext gc;
 
     @FXML
-    private ChoiceBox choiceBox;
+    private ChoiceBox shapeSelecter;
+
+    @FXML
+    private TextField newShape;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String workingDir = System.getProperty("user.dir");
         gc = canvas.getGraphicsContext2D();
-        choiceBox.setValue("Line");
-        choiceBox.setItems(choiceBoxList);
+        shapeSelecter.setValue("LINE");
+        shapeSelecter.setItems(shapeSelecterList);
+        fileClass.setFileName(workingDir + "/src/vecFiles/Line.vec");
         ArrayList[][] command = vecLoad.LoadVecFile(workingDir + "/src/vecFiles/Line.vec");
-        commandsHandler.commandsHandler(gc, command);
-        System.out.println(choiceBox.getValue());
+        fileClass.setCommandList(command);
+        commandsHandler.commandsHandler(gc, fileClass.commandsList);
+        newShape.setText(shapeSelecter.getValue().toString() + " ");
     }
 
     public void toolSelected(ActionEvent event) {
@@ -49,11 +56,8 @@ public class VectorDesignController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
         File file = fileChooser.showOpenDialog(null);
-        String test = file.toString();
-        System.out.println(test);
-        ArrayList[][] command = vecLoad.LoadVecFile(test);
-        newFile();
-        commandsHandler.commandsHandler(gc, command);
+        String fileLocation = file.toString();
+        openFile(fileLocation);
     }
 
     public void  fileNew() {
@@ -68,4 +72,21 @@ public class VectorDesignController implements Initializable {
         gc.clearRect(0,0, canvasWidth, canvasHeight);
     }
 
+    public void openFile(String fileLocation) {
+        fileClass.setFileName(fileLocation);
+        ArrayList[][] command = vecLoad.LoadVecFile(fileLocation);
+        fileClass.setCommandList(command);
+        newFile();
+        commandsHandler.commandsHandler(gc, command);
+    }
+
+    public void choiceBoxOnAction(ActionEvent event) {
+        newShape.setText(shapeSelecter.getValue().toString() + " ");
+    }
+
+    public void createShape(ActionEvent event) {
+        fileClass.getCommandListSize();
+        fileClass.addCommand(newShape.getText());
+//        fileClass.addCommand();
+    }
 }

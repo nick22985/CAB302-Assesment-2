@@ -28,12 +28,13 @@ public class vecLoad {
             try {
                 br.close();
             } catch (IOException e) {
+
                 e.printStackTrace();
             }
         }
 
         int commandsLength = commands.size();
-        ArrayList[][] TempCommands = new ArrayList[commandsLength][90];
+        ArrayList[][] TempCommands = new ArrayList[commandsLength][500];
         for(int a = 0; a < commandsLength; a++) {
             String temp = commands.get(a).toString();
             String [] words = temp.split(" ");

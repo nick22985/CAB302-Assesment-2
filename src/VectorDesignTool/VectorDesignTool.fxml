@@ -36,7 +36,7 @@
                         <Insets left="10.0" top="10.0" />
                      </VBox.margin>
                   </Text>
-                  <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="210.0" value="2 minutes">
+                  <ChoiceBox fx:id="shapeSelecter" onAction="#choiceBoxOnAction" prefHeight="25.0" prefWidth="210.0" value="2 minutes">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="5.0" />
                      </VBox.margin></ChoiceBox>
@@ -45,12 +45,12 @@
                         <Insets left="10.0" top="10.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="newShape">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="212.0" text="Button">
+                  <Button mnemonicParsing="false" onAction="#createShape" prefHeight="25.0" prefWidth="212.0" text="Create Shape">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
