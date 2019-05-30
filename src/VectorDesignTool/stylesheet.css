@@ -8,3 +8,5 @@
 .customColorStyleClass:selected > .radio > .dot {
   -fx-background-color: transparent;
 }
+
+

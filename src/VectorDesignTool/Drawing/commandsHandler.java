@@ -100,6 +100,8 @@ public class commandsHandler {
         gc.moveTo(x1 * x / 1, y1 * y / 1);
         gc.lineTo((x1 * x / 1), (y1 * y / 1));
         gc.stroke();
+
+
     }
 
     /**

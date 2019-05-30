@@ -52,6 +52,7 @@ public class fileClass {
             if(command[0] != null) {
                 temp += 1;
             }
+
         }
         commandlistSize = temp;
         for (int i = 0; i < commandlistSize; i++) {

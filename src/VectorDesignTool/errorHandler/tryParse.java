@@ -16,6 +16,7 @@ public class tryParse {
         }
     }
 
+
     public static boolean tryParseString(ArrayList array) {
         try {
             array.toString().replaceAll("\\[", "")

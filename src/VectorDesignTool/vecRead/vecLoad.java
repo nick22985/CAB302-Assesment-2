@@ -28,10 +28,10 @@ public class vecLoad {
             try {
                 br.close();
             } catch (IOException e) {
-
                 e.printStackTrace();
             }
         }
+
 
         int commandsLength = commands.size();
         ArrayList[][] TempCommands = new ArrayList[commandsLength][500];

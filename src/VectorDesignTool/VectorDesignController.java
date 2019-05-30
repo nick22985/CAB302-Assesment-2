@@ -177,7 +177,9 @@ public class VectorDesignController implements Initializable {
         }
         addCommand(newShape.getText(), gc);
         setTextBox();
+
     }
+
 
     /**
      *
