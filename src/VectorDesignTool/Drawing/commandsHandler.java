@@ -5,51 +5,69 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
+import static VectorDesignTool.vecRead.fileClass.lengthof2ndDimentioofCommandArray;
+
 public class commandsHandler {
+    /**
+     *
+     * @param gc
+     * @param command
+     */
     public static void commandsHandler(GraphicsContext gc, ArrayList[][] command) {
         fillColorClass.fillTrue = false;
         ChangePenColour(gc, Color.BLACK);
         for (int i = 0; i < command.length; i++) {
-            String type = command[i][0].toString().replaceAll("\\[", "")
+            ArrayList[] currentCommand = command[i];
+            whatToDraw(gc, currentCommand);
+        }
+    }
+
+
+    /**
+     *
+     * @param gc
+     * @param currentCommand
+     */
+    public static void whatToDraw(GraphicsContext gc, ArrayList[] currentCommand) {
+        String type = currentCommand[0].toString().replaceAll("\\[", "")
+                .replaceAll("\\]", "");
+        if (type.equals("LINE") || type.equals("RECTANGLE") || type.equals("PLOT") || type.equals("ELLIPSE")) {
+            tryParse.tryParseDouble(currentCommand[1]);
+            double x1 = Double.parseDouble(currentCommand[1].toString().replaceAll("\\[", "")
+                    .replaceAll("\\]", ""));
+            double y1 = Double.parseDouble(currentCommand[2].toString().replaceAll("\\[", "")
+                    .replaceAll("\\]", ""));
+            if (type.equals("LINE") || type.equals("RECTANGLE") || type.equals("ELLIPSE")) {
+                double x2 = Double.parseDouble(currentCommand[3].toString().replaceAll("\\[", "")
+                        .replaceAll("\\]", ""));
+                double y2 = Double.parseDouble(currentCommand[4].toString().replaceAll("\\[", "")
+                        .replaceAll("\\]", ""));
+                if (type.equals("LINE")) {
+                    DrawLine(gc, x1, y1, x2, y2);
+                }
+                if (type.equals("RECTANGLE")) {
+                    DrawRec(gc, x1, y1, x2, y2);
+                }
+                if (type.equals("ELLIPSE")) {
+                    DrawEllipse(gc, x1, y1, x2, y2);
+                }
+            }
+            if (type.equals("PLOT")) {
+                DrawPlot(gc, x1, y1);
+            }
+        }
+        if (type.equals("PEN") || type.equals("FILL")) {
+            String color = currentCommand[1].toString().replaceAll("\\[", "")
                     .replaceAll("\\]", "");
-            if (type.equals("LINE") || type.equals("RECTANGLE") || type.equals("PLOT") || type.equals("ELLIPSE")) {
-                tryParse.tryParseDouble(command[i][1]);
-                double x1 = Double.parseDouble(command[i][1].toString().replaceAll("\\[", "")
-                        .replaceAll("\\]", ""));
-                double y1 = Double.parseDouble(command[i][2].toString().replaceAll("\\[", "")
-                        .replaceAll("\\]", ""));
-                if (type.equals("LINE") || type.equals("RECTANGLE") || type.equals("ELLIPSE")) {
-                    double x2 = Double.parseDouble(command[i][3].toString().replaceAll("\\[", "")
-                            .replaceAll("\\]", ""));
-                    double y2 = Double.parseDouble(command[i][4].toString().replaceAll("\\[", "")
-                            .replaceAll("\\]", ""));
-                    if (type.equals("LINE")) {
-                        DrawLine(gc, x1, y1, x2, y2);
-                    }
-                    if (type.equals("RECTANGLE")) {
-                        DrawRec(gc, x1, y1, x2, y2);
-                    }
-                    if (type.equals("ELLIPSE")) {
-                        DrawEllipse(gc, x1, y1, x2, y2);
-                    }
-                }
-                if (type.equals("PLOT")) {
-                    DrawPlot(gc, x1, y1);
-                }
+            if (type.equals("PEN")) {
+                ChangePenColour(gc, Color.web(color));
             }
-            if (type.equals("PEN") || type.equals("FILL")) {
-                String color = command[i][1].toString().replaceAll("\\[", "")
-                        .replaceAll("\\]", "");
-                if (type.equals("PEN")) {
-                    ChangePenColour(gc, Color.web(color));
-                }
-                if (type.equals("FILL")) {
-                    ChangeFillColour(color);
-                }
+            if (type.equals("FILL")) {
+                ChangeFillColour(color);
             }
-            if (type.equals("POLYGON")) {
-                DrawPolygon(gc, command[i]);
-            }
+        }
+        if (type.equals("POLYGON")) {
+            DrawPolygon(gc, currentCommand);
         }
     }
 
@@ -133,11 +151,20 @@ public class commandsHandler {
 
     }
 
+    /**
+     *
+     * @param gc
+     * @param command
+     */
     public static void DrawPolygon(GraphicsContext gc, ArrayList[] command) {
 //        gc.strokePolygon(command, command, 1);
 //       gc.fillPolygon();
     }
 
+    /**
+     *
+     * @param color
+     */
     public static void ChangeFillColour(String color) {
         if (color.equals("OFF")) {
             fillColorClass.fillTrue = false;

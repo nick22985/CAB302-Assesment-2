@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        // TODO: 13/05/2019 Graphic Interface
+        String workingDir = System.getProperty("user.dir");
         Parent root = FXMLLoader.load(getClass().getResource("VectorDesignTool.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
