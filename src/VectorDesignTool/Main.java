@@ -11,12 +11,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        String workingDir = System.getProperty("user.dir");
         Parent root = FXMLLoader.load(getClass().getResource("VectorDesignTool.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
     }
 
 

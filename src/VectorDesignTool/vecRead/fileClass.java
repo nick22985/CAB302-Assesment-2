@@ -1,5 +1,6 @@
 package VectorDesignTool.vecRead;
 
+import VectorDesignTool.VectorDesignController;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
@@ -11,6 +12,29 @@ public class fileClass {
     public static ArrayList[][] commandsList;
     public static int commandlistSize;
     public static int[] lengthof2ndDimentioofCommandArray = new int[100000];
+    public static String commandTextBox;
+
+    public static void resetDefault() {
+        commandsList = new ArrayList[1][500];
+        commandlistSize = 0;
+        lengthof2ndDimentioofCommandArray = new int[100000];
+        commandTextBox = "";
+    }
+
+    public static void setTextArea(ArrayList[][] Commands, int a, int b) {
+        String finalStringCommand = "";
+        for (a = 0; a < commandlistSize; a++) {
+            for (b = 0; b < lengthof2ndDimentioofCommandArray[a]; b++) {
+                String temp = Commands[a][b].toString().replace("[", "");
+                temp = temp.replace("]", "");
+                finalStringCommand += temp + " ";
+            }
+            finalStringCommand = VectorDesignController.regexReplace("\\s$", finalStringCommand, "");
+            finalStringCommand += "\n";
+        }
+        commandTextBox = finalStringCommand;
+    }
+
 
     public static void setFileName(String newFileName) {
         fileName = newFileName;
@@ -45,7 +69,6 @@ public class fileClass {
 
     public static void addCommand(String command, GraphicsContext gc) {
         int commandsLengthNewLength = commandlistSize + 1;
-        ArrayList tempComands = new ArrayList();
         ArrayList[][] TempCommands = new ArrayList[commandsLengthNewLength][500];
         for(int a = 0; a < commandlistSize; a++) {
             TempCommands[a] = commandsList[a];
@@ -57,5 +80,6 @@ public class fileClass {
         }
         whatToDraw(gc, TempCommands[commandsLengthNewLength -1]);
         setCommandList(TempCommands);
+        setTextArea(TempCommands, commandsLengthNewLength -1, commandsLengthNewLength - 1);
     }
 }

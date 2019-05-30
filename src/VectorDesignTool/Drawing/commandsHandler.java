@@ -5,8 +5,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
-import static VectorDesignTool.vecRead.fileClass.lengthof2ndDimentioofCommandArray;
-
 public class commandsHandler {
     /**
      *
@@ -15,6 +13,7 @@ public class commandsHandler {
      */
     public static void commandsHandler(GraphicsContext gc, ArrayList[][] command) {
         fillColorClass.fillTrue = false;
+        ChangeFillColour("OFF");
         ChangePenColour(gc, Color.BLACK);
         for (int i = 0; i < command.length; i++) {
             ArrayList[] currentCommand = command[i];
@@ -115,7 +114,7 @@ public class commandsHandler {
         double x = gc.getCanvas().getHeight();
         double y = gc.getCanvas().getWidth();
         if(fillColorClass.fillTrue) {
-            gc.setFill(fillColorClass.color);
+            gc.setFill(fillColorClass.fillColor);
             gc.fillRoundRect(x1 * x, y1 * y, (x2 - x1) * x, (y2 - y1) * y, 0, 0);
         }
         gc.strokeRect(x1 * x, y1 * y, (x2 - x1) * x, (y2 - y1) * y);
@@ -127,6 +126,7 @@ public class commandsHandler {
      * @param color Pen Color to change to
      */
     public static void ChangePenColour(GraphicsContext gc, Color color) {
+        fillColorClass.setColor(color);
         gc.setStroke(color);
     }
 
@@ -142,7 +142,7 @@ public class commandsHandler {
         double x = gc.getCanvas().getHeight();
         double y = gc.getCanvas().getWidth();
         if(fillColorClass.fillTrue) {
-            gc.setFill(fillColorClass.color);
+            gc.setFill(fillColorClass.fillColor);
             gc.fillOval(x1 * x, y1 * y, (x2 - x1) * x, (y2 - y1) * y);
         }
         else {
@@ -157,7 +157,7 @@ public class commandsHandler {
      * @param command
      */
     public static void DrawPolygon(GraphicsContext gc, ArrayList[] command) {
-//        gc.strokePolygon(command, command, 1);
+//        gc.strokePolygon(co 1);
 //       gc.fillPolygon();
     }
 
@@ -171,7 +171,7 @@ public class commandsHandler {
         }
         else {
             fillColorClass.setFill(true);
-            fillColorClass.setColor(Color.web(color));
+            fillColorClass.setFillColor(Color.web(color));
         }
     }
 }

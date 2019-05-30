@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -66,18 +67,7 @@
                                     <Insets left="10.0" top="5.0" />
                                  </VBox.margin>
                               </Text>
-                              <ScrollPane prefHeight="256.0" prefWidth="239.0">
-                                <content>
-                                  <AnchorPane prefHeight="304.0" prefWidth="214.0">
-                                       <children>
-                                          <TextArea editable="false" layoutY="1.0" prefHeight="311.0" prefWidth="214.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                                 <VBox.margin>
-                                    <Insets right="10.0" />
-                                 </VBox.margin>
-                              </ScrollPane>
+                              <TextArea fx:id="vectorCommandTextArea" editable="false" prefHeight="311.0" prefWidth="214.0" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shape Type">
                                  <VBox.margin>
                                     <Insets left="10.0" top="10.0" />
@@ -316,6 +306,24 @@
                                  <VBox.margin>
                                     <Insets right="10.0" />
                                  </VBox.margin>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" prefHeight="39.0" prefWidth="234.0">
+                                 <children>
+                                    <ColorPicker>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </ColorPicker>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets right="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
                               </HBox>
                               <Button mnemonicParsing="false" onAction="#createShape" prefHeight="25.0" prefWidth="212.0" text="Create Shape">
                                  <VBox.margin>
