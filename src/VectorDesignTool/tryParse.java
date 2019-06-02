@@ -1,14 +1,12 @@
-package VectorDesignTool.errorHandler;
+package VectorDesignTool;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class tryParse {
 
     public static Boolean tryParseDouble(ArrayList array) {
         try {
-           Double.parseDouble(array.toString().replaceAll("\\[", "")
+            Double.parseDouble(array.toString().replaceAll("\\[", "")
                     .replaceAll("\\]", ""));
             return true;
         } catch (NumberFormatException e) {

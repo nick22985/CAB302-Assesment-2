@@ -15,6 +15,7 @@ public class vecLoad {
     public static ArrayList[][] LoadVecFile(String fileName) {
         BufferedReader br = null;
         ArrayList commands = new ArrayList();
+        fileClass.fileName = fileName;
 
         try {
             br = new BufferedReader(new FileReader(fileName));
@@ -31,8 +32,6 @@ public class vecLoad {
                 e.printStackTrace();
             }
         }
-
-
         int commandsLength = commands.size();
         ArrayList[][] TempCommands = new ArrayList[commandsLength][500];
         for(int a = 0; a < commandsLength; a++) {

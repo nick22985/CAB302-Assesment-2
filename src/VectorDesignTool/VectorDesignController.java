@@ -12,9 +12,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -25,7 +32,7 @@ import static VectorDesignTool.vecRead.fileClass.*;
 
 public class VectorDesignController implements Initializable {
 
-    ObservableList<String> shapeSelecterList = FXCollections.observableArrayList("LINE", "PLOT", "RECTANGLE", "ELLIPSE", "POLYGON");
+    private ObservableList<String> shapeSelecterList = FXCollections.observableArrayList("LINE", "PLOT", "RECTANGLE", "ELLIPSE", "POLYGON");
     @FXML private RadioButton rbC1;
     @FXML private RadioButton rbC2;
     @FXML private RadioButton rbC3;
@@ -55,6 +62,7 @@ public class VectorDesignController implements Initializable {
     @FXML private TextField newShape;
     @FXML private CheckBox fileEnableScene;
     @FXML private TextArea vectorCommandTextArea;
+    @FXML private BorderPane borderPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,10 +72,6 @@ public class VectorDesignController implements Initializable {
         shapeSelecter.setValue("LINE");
         shapeSelecter.setItems(shapeSelecterList);
         commandsList = new ArrayList[1][500];
-        fileClass.setFileName(workingDir + "/src/vecFiles/Line.vec");
-        ArrayList[][] command = vecLoad.LoadVecFile(workingDir + "/src/vecFiles/Line.vec");
-        fileClass.setCommandList(command);
-        commandsHandler.commandsHandler(gc, fileClass.commandsList);
         newShape.setText(shapeSelecter.getValue().toString() + " 0.400000 0.000000 1.000000 0.400000");
         setTextArea(commandsList, 0, 0);
         setTextBox();
@@ -98,10 +102,31 @@ public class VectorDesignController implements Initializable {
         fill.setStyle("-fx-background-color: rgba(255, 255, 255)");
     }
 
-    public void setTextBox() {
+    private void setTextBox() {
         vectorCommandTextArea.setText(commandTextBox);
         vectorCommandTextArea.selectPositionCaret(vectorCommandTextArea.getLength());
         vectorCommandTextArea.deselect();
+    }
+    double firstX = -1;
+    double firstY= -1;
+    double LastX;
+    double LastY;
+
+    public void getObjectDraw(MouseEvent event) {
+        if (firstX == -1) {
+            firstX = event.getSceneX();
+        }
+        if (firstY == -1) {
+            firstY = event.getSceneY();
+        }
+
+        LastX = event.getSceneX();
+        LastY = event.getSceneY();
+        System.out.println(firstX);
+        System.out.println(firstY);
+        System.out.println(LastX);
+        System.out.println(LastY);
+
     }
 
     public void fileOpen() {
@@ -118,7 +143,7 @@ public class VectorDesignController implements Initializable {
         newFile();
     }
 
-    public void newFile() {
+    private void newFile() {
         double canvasWidth = gc.getCanvas().getWidth();
         double canvasHeight = gc.getCanvas().getHeight();
         resetDefault();
@@ -127,13 +152,16 @@ public class VectorDesignController implements Initializable {
         setTextBox();
     }
 
-    public void openFile(String fileLocation) {
+
+    private void openFile(String fileLocation) {
         fileClass.setFileName(fileLocation);
+        System.out.print(fileLocation);
         newFile();
         fileClass.setCommandList(vecLoad.LoadVecFile(fileLocation));
         commandsHandler.commandsHandler(gc, commandsList);
         setTextArea(commandsList, 0, 0);
         setTextBox();
+
     }
 
     public void choiceBoxOnAction(ActionEvent event) {
@@ -147,10 +175,10 @@ public class VectorDesignController implements Initializable {
             temp[b] = words[b];
         }
         String penFIll = fillColor.getSelectedToggle().getUserData().toString();
-        if (penFIll == "PEN") {
+        if (penFIll.equals("PEN")) {
             tempRadio = pen;
         }
-        if (penFIll == "FILL") {
+        if (penFIll.equals("FILL")) {
             tempRadio = fill;
         }
         tempRadio.setStyle("-fx-background-color: rgba(" + temp[0] + ", " + temp[1] + ", " + temp[2] + ")");
@@ -159,12 +187,19 @@ public class VectorDesignController implements Initializable {
     public void createShape(ActionEvent event) {
         fileClass.getCommandListSize();
         if (fileEnableScene.isSelected()) {
+            if (!fillColorClass.fillTrue) {
+                String temp = getRGBValueCommandString(fill);
+                addCommand(temp, gc);
+            }
             fillColorClass.setFill(true);
-            String temp = getRGBValueCommandString(fill);
-            addCommand(temp, gc);
+            String currentPen = getRGBColor(fill).toString();
+            if(!fillColorClass.fillColor.toString().equals(currentPen)) {
+                String temp = getRGBValueCommandString(fill);
+                addCommand(temp, gc);
+            }
+
         }
         if (!fileEnableScene.isSelected()) {
-            // TODO: 31/05/2019 Make it so fill only adds when it changes 
             if (fillColorClass.fillTrue) {
                 fillColorClass.setFill(false);
                 addCommand("FILL OFF", gc);
@@ -177,7 +212,6 @@ public class VectorDesignController implements Initializable {
         }
         addCommand(newShape.getText(), gc);
         setTextBox();
-
     }
 
 
@@ -186,13 +220,13 @@ public class VectorDesignController implements Initializable {
      * @param fillpen the type of radio button to get the color from
      * @return it returns the color from radio button as a color
      */
-    public String getRGBValueCommandString(RadioButton fillpen) {
+    private String getRGBValueCommandString(RadioButton fillpen) {
         String temp = regexReplace("^\\w{2}", getRGBColor(fillpen).toString(), "");
         temp = regexFind("^\\w{6}", temp, 0);
         return fillpen.getUserData() +  " #" + temp;
     }
 
-    public Color getRGBColor(RadioButton fillpen) {
+    private Color getRGBColor(RadioButton fillpen) {
         String [] splitRGBValue = regexFind("\\((.*?)\\)", fillpen.getStyle(), 1).split(", ");
         int [] rgbtoint = new int [4];
         for (int a = 0; a < splitRGBValue.length; a++) {
@@ -210,7 +244,7 @@ public class VectorDesignController implements Initializable {
      * @param MatcherType the type of match you want Matcher to use
      * @return returns with the regex found Regex statment
      */
-    public String regexFind(String REGEX, String INPUT, int MatcherType) {
+    private String regexFind(String REGEX, String INPUT, int MatcherType) {
         String regexString = "";
         Pattern p = Pattern.compile(REGEX);
         Matcher m = p.matcher(INPUT);
@@ -237,4 +271,46 @@ public class VectorDesignController implements Initializable {
         m.appendTail(sb);
         return sb.toString();
     }
+
+    public void fileSaveT(ActionEvent event) throws IOException {
+        saveFile();
+    }
+
+    public static String fileSaveOpen() {
+        String fileLocation = "";
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            fileLocation = file.toString();
+        }
+        return fileLocation;
+    }
+
+
+    public static void saveFile() throws IOException {
+        String fileContent = "";
+        String saveLocation = "";
+        for (int a = 0; a < commandlistSize; a++) {
+            for (int b = 0; b < lengthof2ndDimentioofCommandArray[a]; b++) {
+                String temp = commandsList[a][b].toString().replace("[", "");
+                temp = temp.replace("]", "");
+                fileContent += temp + " ";
+            }
+            fileContent += "\n";
+        }
+        if (fileName.equals("")) {
+            saveLocation = fileSaveOpen();
+        }
+        else {
+            saveLocation = fileName;
+        }
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(saveLocation));
+        writer.write(fileContent);
+        writer.close();
+
+    }
+
+
 }
