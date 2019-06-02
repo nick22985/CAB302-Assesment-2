@@ -1,0 +1,16 @@
+.customColorStyleClass > .radio {
+  -fx-background-color: transparent;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0px;
+  -fx-padding: 0.0em;
+}
+
+.customColorStyleClass:selected > .radio > .dot {
+  -fx-background-color: transparent;
+}
+
+.customColorStyleClass:selected  {
+
+}
+
+

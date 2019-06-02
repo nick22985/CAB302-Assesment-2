@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderPane" prefHeight="736.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VectorDesignTool.VectorDesignController">
+   <top>
+      <VBox prefHeight="25.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="menubar" prefHeight="29.0" prefWidth="1280.0">
+               <menus>
+                  <Menu fx:id="file" mnemonicParsing="false" text="File">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#fileOpen" text="Open" />
+                        <MenuItem mnemonicParsing="false" onAction="#fileNew" text="New" />
+                        <MenuItem onAction="#fileSaveT" mnemonicParsing="false" text="Save" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                        <Menu mnemonicParsing="false" text="Edit">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Delete" />
+                           </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <right>
+      <VBox fx:id="vBox" prefHeight="705.0" prefWidth="259.0" style="-fx-background-color: rgba(216, 216, 216);" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vector Commands">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Text>
+            <TextArea fx:id="vectorCommandTextArea" editable="false" prefHeight="311.0" prefWidth="214.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shape Type">
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <ChoiceBox fx:id="shapeSelecter" onAction="#choiceBoxOnAction" prefHeight="25.0" prefWidth="210.0" value="2 minutes">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Shape">
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="newShape">
+               <VBox.margin>
+                  <Insets left="10.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="TOP_CENTER" prefHeight="68.0" prefWidth="327.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pen" />
+                        <RadioButton fx:id="pen" accessibleRole="THUMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" selected="true" style="-fx-background-color: rgba(255, 255, 255); -fx-blend-mode: 50;" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="fillColor" />
+                           </toggleGroup>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </RadioButton>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fill">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></Text>
+                        <RadioButton fx:id="fill" accessibleRole="THUMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(255, 255, 255);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$fillColor">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </RadioButton>
+                     </children>
+                  </VBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <CheckBox fx:id="fileEnableScene" mnemonicParsing="false" text="Enable Fill" />
+            <HBox prefHeight="100.0" prefWidth="222.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox>
+                           <children>
+                              <RadioButton fx:id="rbC1" accessibleRole="THUMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" selected="true" style="-fx-background-color: rgba(255, 255, 255);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="customColor" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC2" accessibleRole="BUTTON" accessibleText="test" depthTest="DISABLE" ellipsisString="" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(195, 195, 195);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC3" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(88, 88, 88);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC4" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" selected="true" style="-fx-background-color: rgba(0, 0, 0);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC5" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(136, 0, 27);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC6" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(236, 28, 36);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="90.0">
+                           <children>
+                              <RadioButton fx:id="rbC7" accessibleRole="COMBO_BOX" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(255, 127, 39);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC8" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(255, 202, 24);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC9" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(253, 236, 166);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC10" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(255, 242, 0);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC11" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(196, 255, 14);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC12" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(14, 209, 69);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <RadioButton fx:id="rbC13" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(140, 255, 251);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC14" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(0, 168, 243);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC15" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(63, 72, 204);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC16" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(184, 61, 186);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC17" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(255, 174, 200);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rbC18" accessibleRole="THUMB" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectColor" pickOnBounds="false" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: rgba(185, 122, 86);" styleClass="customColorStyleClass" stylesheets="@stylesheet.css" textFill="TRANSPARENT" toggleGroup="$customColor">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="1.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#createShape" prefHeight="25.0" prefWidth="212.0" text="Create Shape">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </VBox>
+   </right>
+   <center>
+      <ScrollPane fx:id="borderPainMid" fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane>
+               <children>
+                  <Pane fx:id="canvasContainer" style="-fx-background-color: rgba(195, 195, 195);">
+                     <children>
+                        <Pane layoutX="190.0" layoutY="31.0" style="-fx-background-color: rgba(255, 255, 255);">
+                           <children>
+                              <Canvas fx:id="canvas" height="647.0" onMouseDragged="#getObjectDraw" width="647.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                     <padding>
+                        <Insets bottom="31.0" right="190.0" />
+                     </padding>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
